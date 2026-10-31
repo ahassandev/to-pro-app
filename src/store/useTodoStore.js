@@ -6,7 +6,8 @@ export const useTodoStore = create(
     (set) => ({
       // State
       todos: [],
-      filter: 'all', // 'all' | 'completed' | 'pending'
+      filter: 'all',   // 'all' | 'completed' | 'pending'
+      isDarkMode: false, // dark mode default off
 
       // Actions
       addTodo: (text) =>
@@ -35,15 +36,22 @@ export const useTodoStore = create(
         })),
 
       setFilter: (filter) =>
-        set({
-          filter,
-        }),
+        set({ filter }),
+
+      // Dark mode toggle — true→false ya false→true
+      toggleDarkMode: () =>
+        set((state) => ({ isDarkMode: !state.isDarkMode })),
     }),
     {
       name: 'todo-storage',
-      partialize: (state) => ({ todos: state.todos }),
+      // todos aur isDarkMode dono save karo — filter nahi
+      partialize: (state) => ({
+        todos: state.todos,
+        isDarkMode: state.isDarkMode,
+      }),
     }
   )
 );
 
 export default useTodoStore;
+
