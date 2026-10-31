@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
@@ -7,7 +7,7 @@ const TodoStats = lazy(() => import('./components/TodoStats'));
 
 function App() {
   return (
-    <React.Fragment>
+    <>
       <main className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50/40 flex flex-col items-center justify-start sm:justify-center p-4 sm:p-6 md:p-8 text-slate-800">
         <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-6 sm:p-8 space-y-6">
           {/* Header */}
@@ -43,7 +43,7 @@ function App() {
           <TodoList />
         </div>
       </main>
-    </React.Fragment>
+    </>
   );
 }
 

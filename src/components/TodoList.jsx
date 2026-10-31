@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useTodoStore } from '../store/useTodoStore';
 import TodoItem from './TodoItem';
 
@@ -12,17 +13,20 @@ function TodoList() {
   const filter = useTodoStore((state) => state.filter);
   const setFilter = useTodoStore((state) => state.setFilter);
 
-  const filteredTodos = todos.filter((todo) => {
-    if (filter === 'completed') return todo.completed;
-    if (filter === 'pending') return !todo.completed;
-    return true;
-  });
+  const filteredTodos = useMemo(() =>
+    todos.filter((todo) => {
+      if (filter === 'completed') return todo.completed;
+      if (filter === 'pending') return !todo.completed;
+      return true;
+    }),
+    [todos, filter]
+  );
 
-  const counts = {
+  const counts = useMemo(() => ({
     all: todos.length,
     pending: todos.filter((t) => !t.completed).length,
     completed: todos.filter((t) => t.completed).length,
-  };
+  }), [todos]);
 
   return (
     <div className="w-full space-y-4">

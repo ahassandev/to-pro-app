@@ -14,10 +14,10 @@ export const useTodoStore = create(
           todos: [
             ...state.todos,
             {
-              id: Date.now(),
+              id: crypto.randomUUID(),
               text: text.trim(),
               completed: false,
-              createdAt: new Date(),
+              createdAt: new Date().toISOString(),
             },
           ],
         })),
@@ -41,6 +41,7 @@ export const useTodoStore = create(
     }),
     {
       name: 'todo-storage', // localStorage key name
+      partialize: (state) => ({ todos: state.todos }), // sirf todos save karo, filter nahi
     }
   )
 );
