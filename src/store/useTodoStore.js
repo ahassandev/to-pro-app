@@ -40,8 +40,8 @@ export const useTodoStore = create(
         }),
     }),
     {
-      name: 'todo-storage', // localStorage key name
-      partialize: (state) => ({ todos: state.todos }), // sirf todos save karo, filter nahi
+      name: 'todo-storage',
+      partialize: (state) => ({ todos: state.todos }),
     }
   )
 );
